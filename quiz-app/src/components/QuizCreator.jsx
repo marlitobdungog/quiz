@@ -41,11 +41,13 @@ const QuizCreator = () => {
   const removeOption = (qIndex, oIndex) => {
     const newQuestions = [...questions];
     if (newQuestions[qIndex].options.length > 2) {
-        newQuestions[qIndex].options.splice(oIndex, 1);
-        if (newQuestions[qIndex].correctAnswer >= newQuestions[qIndex].options.length) {
-            newQuestions[qIndex].correctAnswer = 0;
-        }
-        setQuestions(newQuestions);
+      newQuestions[qIndex].options.splice(oIndex, 1);
+      if (newQuestions[qIndex].correctAnswer === oIndex) {
+        newQuestions[qIndex].correctAnswer = 0;
+      } else if (newQuestions[qIndex].correctAnswer > oIndex) {
+        newQuestions[qIndex].correctAnswer--;
+      }
+      setQuestions(newQuestions);
     }
   };
 
